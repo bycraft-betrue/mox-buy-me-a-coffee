@@ -71,3 +71,10 @@ def test_10_people_can_fund(coffee):
 def test_get_rate(coffee):
     assert coffee.get_eth_to_usd_rate(SEND_VALUE) > 0
 
+def test_default_behavior(coffee, account):
+    # Act & Assert
+    with boa.env.prank(RANDOM_USER):
+        with boa.reverts("You must spend more ETH!"):
+            coffee.__default__()
+    
+    
